@@ -11,7 +11,7 @@
 3. Inside `frontend_challenge/` run `docker-compose up`.
 4. Go to `http://localhost:3000/`.
 
-# DESCRiPTION AND USAGE
+# DESCRIPTION AND USAGE
 
 1. Data from csv is loaded into database.
 2. Data is serialized with Django REST Framework and accessible at `/data/` and `/campaigns/` endpoints.
