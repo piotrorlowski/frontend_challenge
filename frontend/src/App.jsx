@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Chart from './components/Chart';
-import Sidebar from './components/Sidebar';
-import './assets/App.scss';
-import axios from 'axios';
+import "./assets/App.scss";
+
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+
+import Chart from "./components/Chart";
+import Sidebar from "./components/Sidebar";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -11,8 +13,8 @@ const App = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [pageSize, setPageSize] = useState(10);
 
-  const baseDataUrl = 'http://localhost:8000/api/data/';
-  const baseCampaignUrl = 'http://localhost:8000/api/campaign/';
+  const baseDataUrl = "http://localhost:8000/api/data/";
+  const baseCampaignUrl = "http://localhost:8000/api/campaign/";
 
   const getData = async (url, params) => {
     const response = await axios.get(url, { params });
@@ -32,17 +34,17 @@ const App = () => {
       finalUrl = `${finalUrl}?page_size=${pageSize}`;
     }
     if (dataSource.length) {
-      finalUrl = `${finalUrl}&datasource__in=${dataSource.join(',')}`;
+      finalUrl = `${finalUrl}&datasource__in=${dataSource.join(",")}`;
     }
     if (campaigns.length) {
       finalUrl = `${finalUrl}&campaign__in=${campaigns}`;
     }
     return finalUrl;
-  }
+  };
 
   useEffect(() => {
     async function fetchData() {
-      const url = fetchUrl(baseDataUrl)
+      const url = fetchUrl(baseDataUrl);
       setData(await getData(url));
       if (!campaigns.length) {
         setCampaignsList(await getData(baseCampaignUrl));
@@ -50,40 +52,37 @@ const App = () => {
     }
     fetchData();
   }, []);
-  
-
 
   const onSelectDataSource = (event) => {
-    const dataSourceValues = event.map(dataSource => dataSource.value);
+    const dataSourceValues = event.map((item) => item.value);
     setDataSource(dataSourceValues);
   };
 
   const onSelectCampaign = (event) => {
-    const campaignsValues = event.map(campaign => campaign.value);;
+    const campaignsValues = event.map((campaign) => campaign.value);
     setCampaigns(campaignsValues);
   };
 
-
   const onPageSizeChange = (event) => {
-    const pageSize = event.target.value;
-    setPageSize(pageSize);
+    const pageSizeValue = event.target.value;
+    setPageSize(pageSizeValue);
   };
 
   const onButtonClick = async () => {
-    const url = fetchUrl(baseDataUrl)
+    const url = fetchUrl(baseDataUrl);
     setData(await getData(url));
   };
 
   return (
     <div className="App">
-        <Sidebar
-          campaignsList={campaignsList}
-          onSelectDataSource={onSelectDataSource}
-          onSelectCampaign={onSelectCampaign}
-          onButtonClick={onButtonClick}
-          onPageSizeChange={onPageSizeChange}
-        />
-        <Chart data={data} />
+      <Sidebar
+        campaignsList={campaignsList}
+        onSelectDataSource={onSelectDataSource}
+        onSelectCampaign={onSelectCampaign}
+        onButtonClick={onButtonClick}
+        onPageSizeChange={onPageSizeChange}
+      />
+      <Chart data={data} />
     </div>
   );
 };
