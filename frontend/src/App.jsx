@@ -21,8 +21,6 @@ const App = () => {
     return response.data.results;
   };
 
-  // test change for pre-commit
-
   /**
    * Workaround for replacing '+' with '%20' by axios.
    * Axios was replacing spaces with '+' which was not read
