@@ -25,8 +25,8 @@ def create_data_entries(apps, schema_editor):
                 impressions=row[4],
             )
     campaign_names_set = set(campaign_names_list)
-    for campaign in campaign_names_set:
-        Campaign.objects.create(name=campaign)
+    for campaign_name in campaign_names_set:
+        Campaign.objects.create(name=campaign_name)
 
 
 class Migration(migrations.Migration):
