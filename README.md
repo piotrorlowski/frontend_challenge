@@ -28,7 +28,7 @@
 13. I built three components `App.jsx` (main logic and state holder), `Sidebar.jsx` (as name suggests - sidebar with different data manipulation options) and `Chart.jsx` (chart for showing data).
 14. I included linters and linted code both for frontend and backend.
 15. Initially whole data is fetched but the number of results is reduced with 10 pageSize - it can be changed through 'Page size' input.
-16. Multiple datasources and multiple campaigns can be added.
+16. Multiple datasources and multiple campaigns can be added through selects in sidebar to requests.
 17. Any changes have to be applied by clicking 'Apply' button.
 18. When choosing campaign, first try to write some characters, so campaigns will be filtered by your typing. I added this solution because there were too many results. It could be improved to send requests when user is typing and fetch live data, but it would require more time to implement.
 19. Not for every campaign there will be relevant results.
