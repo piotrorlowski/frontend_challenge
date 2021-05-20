@@ -10,8 +10,8 @@ const Chart = (props) => {
             >
             <CartesianGrid horizontal vertical={false} />
             <XAxis dataKey="date" />
-            <YAxis yAxisId="left" label={{ value: 'Clicks', angle: -90, position: 'insideLeft' }} tickCount="6" domain={[0, 1000]}/>
-            <YAxis yAxisId="right" orientation="right" label={{ value: 'Impressions', angle: 90, position: 'insideRight' }}/>
+            <YAxis yAxisId="left" label={{ value: 'Clicks', angle: -90, position: 'insideLeft' }} />
+            <YAxis yAxisId="right" orientation="right" label={{ value: 'Impressions', angle: 90, position: 'insideRight' }} />
             <Tooltip />
             <Legend />
             <Line yAxisId="left" type="linear" dataKey="clicks" stroke="#8884d8" activeDot={{ r: 8 }} />
