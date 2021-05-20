@@ -9,21 +9,15 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-import environ
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import environ
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-root = environ.Path(__file__)  # get root of the project
-
 env = environ.Env()
-environ.Env.read_env()  # reading .env file
 
-SITE_ROOT = root()
+environ.Env.read_env()
 
 SECRET_KEY = env.str("SECRET_KEY")
 

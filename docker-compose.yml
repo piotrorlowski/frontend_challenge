@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+    backend:
+        env_file:
+            - .env
+        image: backend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - .:/code:delegated
+            - python_lib:/usr/local/lib/python3.7
+        ports:
+            - 8000:8000
+        command: >-
+            bash -c "python manage.py migrate
+            && python manage.py runserver 0.0.0.0:8000"
+
+    frontend:
+        image: frontend
+        environment:
+            - BACKEND_URL=http://localhost:8000
+        build:
+            context: frontend/
+            dockerfile: Dockerfile
+        ports:
+            - 3000:3000
+        volumes:
+            - ./frontend:/code:delegated
+            - node_modules:/code/node_modules
+        depends_on:
+            - backend
+        command: yarn start
+
+volumes:
+    python_lib:
+    node_modules:
