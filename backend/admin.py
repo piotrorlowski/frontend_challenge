@@ -1,11 +1,11 @@
 from django.contrib import admin
-from backend.models import DataEntry
+from backend.models import Data
 
 
-class DataEntryAdmin(admin.ModelAdmin):
-    """Django admin for DataEntry."""
+class DataAdmin(admin.ModelAdmin):
+    """Django admin for Data."""
 
     exclude = []
 
 
-admin.site.register(DataEntry, DataEntryAdmin)
+admin.site.register(Data, DataAdmin)

@@ -1,8 +1,8 @@
 from django.db import models
 
 
-class DataEntry(models.Model):
-    """Model for DataEntry."""
+class Data(models.Model):
+    """Model for Data objects."""
 
     date = models.DateField(null=True)
     datasource = models.CharField(max_length=20, default="")
@@ -13,3 +13,12 @@ class DataEntry(models.Model):
 
     class Meta:
         ordering = ["created"]
+
+
+class Campaign(models.Model):
+    """Model for Campaign options."""
+
+    name = models.CharField(max_length=200, default="")
+
+    class Meta:
+        ordering = ["name"]

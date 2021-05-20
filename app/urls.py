@@ -4,7 +4,8 @@ from rest_framework import routers
 from backend import views
 
 router = routers.DefaultRouter()
-router.register(r"data", views.DataEntryViewSet)
+router.register(r"data", views.DataViewSet)
+router.register(r"campaign", views.CampaignViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

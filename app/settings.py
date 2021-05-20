@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "backend.apps.BackendConfig",
     "django_extensions",
-    "rest_framework",
     "corsheaders",
+    "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -129,16 +130,10 @@ STATIC_URL = "/static/"
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "DEFAULT_RENDERER_CLASSES": (
-        "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
-        "djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer",
-    ),
-    "DEFAULT_PARSER_CLASSES": (
-        "djangorestframework_camel_case.parser.CamelCaseFormParser",
-        "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
-        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
-    ),
-    "PAGE_SIZE": 3000,
+    "DEFAULT_FILTER_BACKENDS": [
+        "url_filter.integrations.drf.DjangoFilterBackend",
+    ],
+    "PAGE_SIZE": 2000,
 }
 
 CORS_ORIGIN_WHITELIST = env.tuple("CORS_ORIGIN_WHITELIST")
