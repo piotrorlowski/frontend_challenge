@@ -85,7 +85,11 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  campaignsList: PropTypes.arrayOf(string),
+  campaignsList: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: string,
+    })
+  ),
   onSelectDataSource: PropTypes.func,
   onSelectCampaign: PropTypes.func,
   onPageSizeChange: PropTypes.func,
