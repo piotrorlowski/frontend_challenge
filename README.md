@@ -24,7 +24,7 @@
 9. I think chart could get some improvement, maybe I could try out some other library, but that would require more time.
 10. There isn't much styling in terms of RWD, but there could be, so data could be viewed on mobile devices with better UX, so better view it on desktop monitor.
 11. I used the functional components approach and I used react hooks for handling state, though I don't have much experience with it (on daily basis I work in VueJS), so it probably could be improved.
-12. I had some issues with axios as at the first aproach I wanted to just pass dynamic params to axios.get() but later it resolved that combined multiple choices (datasources and campaigns) have their spaces replaced by '+' instead of '%20' and '+' couldn't be read properly by DRF, so I decided to write some function to create dynamic urls for the requests.
+12. I had some issues with axios as at the first aproach I wanted to just pass dynamic params to axios.get() but later it resolved that combined multiple choices (datasources and campaigns) had their spaces replaced by '+' instead of '%20' and '+' couldn't be read properly by DRF, so I decided to write some function to create dynamic urls for the requests.
 13. I built three components `App.jsx` (main logic and state holder), `Sidebar.jsx` (as name suggests sidebar with different data manipulation options) and `Chart.jsx` (chart for showing data).
 14. I included linters and linted code both for frontend and backend.
 15. Initially whole data is fetched but the number of results is reduced with 10 pageSize - it can be changed through 'Page size' input.
