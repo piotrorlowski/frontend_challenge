@@ -7,7 +7,7 @@
         ALLOWED_HOSTS=localhost
         AUTH_PASSWORD_VALIDATORS=''
         CORS_ORIGIN_WHITELIST=http://localhost:3000
-        
+
 3. Inside `frontend_challenge/` run `docker-compose up`.
 4. Go to `http://localhost:3000/`.
 
@@ -17,7 +17,7 @@
 2. Data is serialized with Django REST Framework and accessible at `/data/` and `/campaigns/` endpoints.
 3. `/data/` endpoint is for fetching different (csv) data.
 4. `/campaigns/` endpoint is mostly for fetching campaings options for react select component (multiselect for selecting different campaigns).
-5. There were 4 unique datasource, so I hardcoded them instead to fetch them from backend as it wasn't worth the effort at this point (file with extracted unique datasources can be viewed here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/datasource.txt, I removed it later as it wasn't needed).
+5. There were 4 unique datasources, so I hardcoded them instead to fetch them from backend as it wasn't worth the effort at this point (file with extracted unique datasources can be viewed here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/datasource.txt, I removed it later as it wasn't needed).
 6. In contrary to datasources there were 1828 unique campaigns, so I extracted them and created data model for them to store in db (file can be visible here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/campaign.txt, I removed it later as it wasn't needed).
 7. I had to somehow control the number of requested objects, so I added 'Page size' input to manually control how many results I would like to get for data chart.
 8. I tried to reflect the look of the chart from the document as much as I could though I don't have much experience in handling charts, especially as react libraries.
