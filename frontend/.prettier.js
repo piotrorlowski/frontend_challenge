@@ -10,4 +10,4 @@ module.exports = {
     arrowParens: "always",
     endOfLine: "auto",
     htmlWhitespaceSensitivity: "ignore",
-  };
+};
