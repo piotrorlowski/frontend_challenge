@@ -8,18 +8,25 @@ import csv
 
 @transaction.atomic
 def create_data_entries(apps, schema_editor):
-    DataEntry = apps.get_model("backend", "DataEntry")
+    Data = apps.get_model("backend", "Data")
+    Campaign = apps.get_model("backend", "Campaign")
+    campaign_names_list = []
     with open("data.csv") as file:
         rows = csv.reader(file)
         next(rows)
+
         for row in rows:
-            DataEntry.objects.create(
+            campaign_names_list.append(row[2])
+            Data.objects.create(
                 date=datetime.strptime(row[0], "%d.%m.%Y").date(),
                 datasource=row[1],
                 campaign=row[2],
                 clicks=row[3],
                 impressions=row[4],
             )
+    campaign_names_set = set(campaign_names_list)
+    for campaign in campaign_names_set:
+        Campaign.objects.create(name=campaign)
 
 
 class Migration(migrations.Migration):

@@ -1,32 +1,35 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from './components/Chart';
 import Sidebar from './components/Sidebar';
 import './assets/App.scss';
-import { DataContext } from './context/DataContext';
 import axios from 'axios';
 
 const App = () => {
   const [data, setData] = useState([]);
+  const [campaigns, setCampaigns] = useState([]);
 
-  const providerValue = useMemo(() => ({data, setData}), [data, setData]);
+  const baseDataUrl = 'http://localhost:8000/api/data/';
+  const baseCampaignUrl = 'http://localhost:8000/api/campaign/';
 
-  const baseUrl = 'http://localhost:8000/api/data/';
-
-  const getData = async (params) => {
-    const response = await axios.get(baseUrl, { params });
-    setData(response.data.results);
+  const getData = async (url, params) => {
+    const response = await axios.get(url, { params });
+    return response.data.results;
   };
 
   useEffect(() => {
-      getData({ campaign: 'Like Ads' });
-  }, []);
+    async function fetchData() {
+      const params = { datasource_in: 'Facebook Ads,Google Adwords', page_size: "30" };
+      setData(await getData(baseDataUrl, params));
+      setCampaigns( await getData(baseCampaignUrl));
+    }
+    fetchData();
+    return () => { };
+  }, [])
 
   return (
     <div className="App">
-      <DataContext.Provider value={providerValue}>
-        <Sidebar />
+        <Sidebar campaigns={campaigns} />
         <Chart data={data} />
-      </DataContext.Provider>
     </div>
   );
 };

@@ -1,22 +1,27 @@
 import React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import '../assets/Chart.scss';
 
 const Chart = (props) => {
     const renderLineChart = (
-        <LineChart width={1000} height={500} data={props.data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="clicks" stroke="#8884d8" />
-        <Line type="monotone" dataKey="impressions" stroke="#82ca9d" />
-        </LineChart>
+        <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+            data={props.data}
+            >
+            <CartesianGrid horizontal vertical={false} />
+            <XAxis dataKey="date" />
+            <YAxis yAxisId="left" label={{ value: 'Clicks', angle: -90, position: 'insideLeft' }} tickCount="6" domain={[0, 1000]}/>
+            <YAxis yAxisId="right" orientation="right" label={{ value: 'Impressions', angle: 90, position: 'insideRight' }}/>
+            <Tooltip />
+            <Legend />
+            <Line yAxisId="left" type="linear" dataKey="clicks" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line yAxisId="right" type="linear" dataKey="impressions" stroke="#82ca9d"  />
+            </LineChart>
+      </ResponsiveContainer>
     );
     
     return (
-        <div>
+        <div className="Chart">
             {renderLineChart}
         </div>
     );

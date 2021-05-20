@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "backend.apps.BackendConfig",
     "django_extensions",
-    "rest_framework",
     "corsheaders",
+    "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -138,7 +139,10 @@ REST_FRAMEWORK = {
         "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
         "djangorestframework_camel_case.parser.CamelCaseJSONParser",
     ),
-    "PAGE_SIZE": 3000,
+    "DEFAULT_FILTER_BACKENDS": [
+        "url_filter.integrations.drf.DjangoFilterBackend",
+    ],
+    "PAGE_SIZE": 10,
 }
 
 CORS_ORIGIN_WHITELIST = env.tuple("CORS_ORIGIN_WHITELIST")
