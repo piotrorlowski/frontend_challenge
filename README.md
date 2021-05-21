@@ -13,6 +13,8 @@
 
 # DESCRIPTION AND USAGE
 
+![image](https://user-images.githubusercontent.com/23028687/119056746-82452000-b9cb-11eb-9724-a761095b813e.png)
+
 1. Data from csv is loaded into database.
 2. Data is serialized with Django REST Framework and accessible at `/data/` and `/campaigns/` endpoints.
 3. `/data/` endpoint is for fetching different (csv) data.
@@ -32,5 +34,3 @@
 17. Any changes have to be applied by clicking 'Apply' button.
 18. When choosing campaign, first try to write some characters, so campaigns will be filtered by your typing. I added this solution because there were too many results. It could be improved to send requests when user is typing and fetch live data, but it would require more time to implement.
 19. Not for every campaign there will be relevant results.
-
-![image](https://user-images.githubusercontent.com/23028687/119056746-82452000-b9cb-11eb-9724-a761095b813e.png)
