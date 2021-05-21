@@ -15,7 +15,7 @@
 
 ## Venv
 
-1. If there would be some problems to docker installation, this is an alternative (btw. this is faster than docker build).
+1. If there would be some problems with docker installation, this is an alternative (btw. this is faster than docker build).
 2. `git clone git@github.com:piotrorlowski/frontend_challenge.git && cd frontend_challenge && touch app/.env`.
 3. in `.env` put:
 
