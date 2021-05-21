@@ -1,4 +1,4 @@
-# INSTALLATION
+# Installation
 
 1. `git clone git@github.com:piotrorlowski/frontend_challenge.git && cd frontend_challenge && touch .env`.
 2.  in `.env` put:
@@ -11,9 +11,11 @@
 3. Inside `frontend_challenge/` run `docker-compose up`.
 4. Go to `http://localhost:3000/`.
 
-# DESCRIPTION AND USAGE
+# Description and usage
 
 ![image](https://user-images.githubusercontent.com/23028687/119056746-82452000-b9cb-11eb-9724-a761095b813e.png)
+
+## App implementation
 
 1. Data from csv is loaded into the database.
 2. Data is serialized with the Django REST Framework and accessible at `/data/` and `/campaigns/` endpoints.
@@ -29,9 +31,13 @@
 12. I had some issues with axios as at the first aproach I wanted to just pass dynamic params to axios.get() but later it resolved that combined multiple choices (datasources and campaigns) had their spaces replaced by '+' instead of '%20' and '+' couldn't be read properly by DRF, so I decided to write some function to create dynamic urls for the requests.
 13. I built three components `App.jsx` (main logic and state holder), `Sidebar.jsx` (as name suggests - sidebar with different data manipulation options) and `Chart.jsx` (chart for showing data).
 14. I included linters and linted code both for frontend and backend.
-15. Initially whole data is fetched but the number of results is reduced with 10 pageSize - it can be changed through 'Page size' input.
-16. Multiple datasources and multiple campaigns can be added through selects in sidebar to requests.
-17. Any changes have to be applied by clicking 'Apply' button.
-18. When choosing campaign, first try to write some characters, so campaigns will be filtered by your typing. I added this solution because there were too many results. It could be improved to send requests when user is typing and fetch live data, but it would require more time to implement.
-19. Not for every campaign there will be relevant results.
-20. Time filtering could be applied with some calendar DatePicker lib on frontend.
+15. I wrote some tests both for frontend and backend.
+
+## UI and features explanation
+
+16. Initially whole data is fetched but the number of results is reduced with 10 pageSize - it can be changed through 'Page size' input.
+17. Multiple datasources and multiple campaigns can be added through selects in sidebar to requests.
+18. Any changes have to be applied by clicking 'Apply' button.
+19. When choosing campaign, first try to write some characters, so campaigns will be filtered by your typing. I added this solution because there were too many results. It could be improved to send requests when user is typing and fetch live data, but it would require more time to implement.
+20. Not for every campaign there will be relevant results.
+21. Time filtering could be applied with some calendar DatePicker lib on frontend, hadn't time for that unfortunately.

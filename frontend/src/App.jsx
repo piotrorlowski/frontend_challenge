@@ -17,7 +17,7 @@ const App = () => {
   const baseCampaignUrl = "http://localhost:8000/api/campaign/";
 
   /**
-   * Function fot getting data from API.
+   * Function for getting data from the API.
    * @param {string} url - api endpoint url
    * @returns {Promise} - returns axios promise
    */
@@ -32,20 +32,20 @@ const App = () => {
    * correctly by DRF api. This function creates url for fetching
    * data by appending strings with dynamic values.
    * @param {string} url - base api url
-   * @returns {string} - final url for axios request
+   * @returns {string} - url for the axios request
    */
   const fetchUrl = (url) => {
-    let finalUrl = url;
+    let fetchedUrl = url;
     if (pageSize) {
-      finalUrl = `${finalUrl}?page_size=${pageSize}`;
+      fetchedUrl = `${fetchedUrl}?page_size=${pageSize}`;
     }
     if (dataSource.length) {
-      finalUrl = `${finalUrl}&datasource__in=${dataSource.join(",")}`;
+      fetchedUrl = `${fetchedUrl}&datasource__in=${dataSource.join(",")}`;
     }
     if (campaigns.length) {
-      finalUrl = `${finalUrl}&campaign__in=${campaigns}`;
+      fetchedUrl = `${fetchedUrl}&campaign__in=${campaigns}`;
     }
-    return finalUrl;
+    return fetchedUrl;
   };
 
   /**
@@ -54,8 +54,10 @@ const App = () => {
    */
   useEffect(() => {
     async function fetchData() {
-      const url = fetchUrl(baseDataUrl);
-      setData(await getData(url));
+      if (!data.length) {
+        const url = fetchUrl(baseDataUrl);
+        setData(await getData(url));
+      }
       if (!campaigns.length) {
         setCampaignsList(await getData(baseCampaignUrl));
       }

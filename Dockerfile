@@ -6,9 +6,13 @@ RUN apt-get update && apt-get install -y \
     make \
     python3-dev
 
+ADD docker-entrypoint.sh /code/docker-entrypoint.sh
+ENTRYPOINT ["/code/docker-entrypoint.sh"]
+
 COPY requirements.txt /code/requirements.txt
 
 RUN pip install -r /code/requirements.txt
+
 
 COPY . code
 WORKDIR /code
