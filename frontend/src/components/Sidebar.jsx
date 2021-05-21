@@ -30,11 +30,21 @@ const Sidebar = (props) => {
     label: campaign.name,
   }));
 
+  /**
+   * Function for filtering 'campaign' options results.
+   * @param {string} inputValue - value picked by user in select component
+   */
   const filterOptions = (inputValue) =>
     campaignOptions.filter((item) =>
       item.label.toLowerCase().includes(inputValue.toLowerCase())
     );
 
+  /**
+   * Function for loading filtered 'campaign' results
+   * into searchable select component.
+   * @param {string} inputValue - value picked by user in select component
+   * @param {Function} callback - callback function
+   */
   const loadOptions = (inputValue, callback) => {
     setTimeout(() => {
       callback(filterOptions(inputValue));

@@ -16,7 +16,7 @@ import {
 const Chart = (props) => {
   const { data } = props;
 
-  const renderLineChart = (
+  const lineChart = (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data}>
         <CartesianGrid horizontal vertical={false} />
@@ -49,7 +49,7 @@ const Chart = (props) => {
     </ResponsiveContainer>
   );
 
-  return <div className="Chart">{renderLineChart}</div>;
+  return <div className="Chart">{lineChart}</div>;
 };
 
 Chart.propTypes = {

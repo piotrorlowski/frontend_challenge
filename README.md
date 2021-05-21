@@ -15,10 +15,10 @@
 
 ![image](https://user-images.githubusercontent.com/23028687/119056746-82452000-b9cb-11eb-9724-a761095b813e.png)
 
-1. Data from csv is loaded into database.
-2. Data is serialized with Django REST Framework and accessible at `/data/` and `/campaigns/` endpoints.
-3. `/data/` endpoint is for fetching different (csv) data.
-4. `/campaigns/` endpoint is mostly for fetching campaings options for react select component (multiselect for selecting different campaigns).
+1. Data from csv is loaded into the database.
+2. Data is serialized with the Django REST Framework and accessible at `/data/` and `/campaigns/` endpoints.
+3. The `/data/` endpoint is for fetching different (csv) data.
+4. The `/campaigns/` endpoint is mostly for fetching campaings options for the react select component (multiselect for selecting different campaigns).
 5. There were 4 unique datasources, so I hardcoded them instead to fetch them from backend as it wasn't worth the effort at this point (file with extracted unique datasources can be viewed here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/datasource.txt, I removed it later as it wasn't needed).
 6. In contrary to datasources there were 1828 unique campaigns, so I extracted them and created data model for them to store in db (file can be visible here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/campaign.txt, I removed it later as it wasn't needed).
 7. I had to somehow control the number of requested objects, so I added 'Page size' input to manually control how many results I would like to get for data chart.
@@ -34,3 +34,4 @@
 17. Any changes have to be applied by clicking 'Apply' button.
 18. When choosing campaign, first try to write some characters, so campaigns will be filtered by your typing. I added this solution because there were too many results. It could be improved to send requests when user is typing and fetch live data, but it would require more time to implement.
 19. Not for every campaign there will be relevant results.
+20. Time filtering could be applied with some calendar DatePicker lib on frontend.
