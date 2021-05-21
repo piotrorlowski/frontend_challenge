@@ -1,5 +1,7 @@
 # Installation
 
+## Docker
+
 1. `git clone git@github.com:piotrorlowski/frontend_challenge.git && cd frontend_challenge && touch .env`.
 2.  in `.env` put:
 
@@ -10,6 +12,23 @@
 
 3. Inside `frontend_challenge/` run `docker-compose up`.
 4. Go to `http://localhost:3000/`.
+
+## Venv
+
+1. If there would be some problems to docker installation, this is an alternative (btw. this is faster than docker build).
+2. `git clone git@github.com:piotrorlowski/frontend_challenge.git && cd frontend_challenge && touch app/.env`.
+3. in `.env` put:
+
+        SECRET_KEY='5_-tpc3t&v@s)m4ly&1$lmff2wn5xcvwdr-xe+gxw88xn^3qn4'
+        ALLOWED_HOSTS=localhost
+        AUTH_PASSWORD_VALIDATORS=''
+        CORS_ORIGIN_WHITELIST=http://localhost:3000
+
+4. `python3 -m venv venv`.
+5. `source venv/bin/activate && pip install -r requirements.txt && ./manage.py migrate && ./manage.py runserver`.
+6. Open other terminal and navigate to `frontend_challenge/frontend`.
+7. `yarn && yarn start`.
+8. Browser should open with app running.
 
 # Description and usage
 
