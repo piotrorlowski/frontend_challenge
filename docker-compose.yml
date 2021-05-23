@@ -30,7 +30,7 @@ services:
             - node_modules:/code/node_modules
         depends_on:
             - backend
-        command: yarn start
+        command: bash -c "yarn && yarn start"
 
 volumes:
     python_lib:
