@@ -34,7 +34,10 @@ FYI: I would not expose SECRET_KEY in real environment.
 
 # Description and usage
 
-![image](https://user-images.githubusercontent.com/23028687/119056746-82452000-b9cb-11eb-9724-a761095b813e.png)
+![React-App](https://user-images.githubusercontent.com/23028687/119269413-e0564b00-bbf7-11eb-9828-41ec8d18f38f.gif
+)
+
+https://www.loom.com/share/93238bc5320e4f6299358c16573c253b
 
 ## App implementation
 
@@ -46,19 +49,18 @@ FYI: I would not expose SECRET_KEY in real environment.
 6. In contrary to datasources there were 1828 unique campaigns, so I extracted them and created data model for them to store in db (file can be visible here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/campaign.txt, I removed it later as it wasn't needed).
 7. I had to somehow control the number of requested objects, so I added 'Page size' input to manually control how many results I would like to get for data chart.
 8. I tried to reflect the look of the chart from the document as much as I could though I don't have much experience in handling charts, especially as react libraries.
-9. I think chart could get some improvement, maybe I could try out some other library, but that would require more time.
-10. There isn't much styling in terms of RWD, but there could be, so data could be viewed on mobile devices with better UX, so better view it on desktop monitor.
-11. I used the functional components approach and I used react hooks for handling state, though I don't have much experience with it (on daily basis I work in VueJS), so it probably could be improved.
-12. I had some issues with axios as at the first aproach I wanted to just pass dynamic params to axios.get() but later it resolved that combined multiple choices (datasources and campaigns) had their spaces replaced by '+' instead of '%20' and '+' couldn't be read properly by DRF, so I decided to write some function to create dynamic urls for the requests.
-13. I built three components `App.jsx` (main logic and state holder), `Sidebar.jsx` (as name suggests - sidebar with different data manipulation options) and `Chart.jsx` (chart for showing data).
-14. I included linters and linted code both for frontend and backend.
-15. I wrote some tests both for frontend and backend.
+9. There isn't much styling in terms of RWD, but there could be, so data could be viewed on mobile devices with better UX, so better view it on desktop monitor.
+10. I used the functional components approach and I used react hooks for handling state, though I don't have much experience with it (on daily basis I work in VueJS), so it probably could be improved.
+11. I had some issues with axios as at the first aproach I wanted to just pass dynamic params to axios.get() but later it resolved that combined multiple choices (datasources and campaigns) had their spaces replaced by '+' instead of '%20' and '+' couldn't be read properly by DRF, so I decided to write some function to create dynamic urls for the requests.
+12. I built three components `App.jsx` (main logic and state holder), `Sidebar.jsx` (as name suggests - sidebar with different data manipulation options) and `Chart.jsx` (chart for showing data).
+13. I included linters and linted code both for frontend and backend.
+14. I wrote some tests both for frontend and backend.
 
 ## UI and features explanation
 
-16. Initially whole data is fetched but the number of results is reduced with 10 pageSize - it can be changed through 'Page size' input.
-17. Multiple datasources and multiple campaigns can be added through selects in sidebar to requests.
-18. Any changes have to be applied by clicking 'Apply' button.
-19. When choosing campaign, first try to write some characters, so campaigns will be filtered by your typing. I added this solution because there were too many results. It could be improved to send requests when user is typing and fetch live data, but it would require more time to implement.
-20. Not for every campaign there will be relevant results.
-21. Time filtering could be applied with some calendar DatePicker lib on frontend, hadn't time for that unfortunately.
+15. Initially whole data is fetched but the number of results is reduced with 10 pageSize - it can be changed through 'Page size' input.
+16. Multiple datasources and multiple campaigns can be added through selects in sidebar to requests.
+17. Any changes have to be applied by clicking 'Apply' button.
+18. When choosing campaign, first try to write some characters, so campaigns will be filtered by your typing. I added this solution because there were too many results. It could be improved to send requests when user is typing and fetch live data, but it would require more time to implement.
+19. Not for every campaign there will be relevant results.
+20. Time filtering could be applied with some calendar DatePicker lib on frontend, hadn't time for that unfortunately.
