@@ -37,8 +37,6 @@ FYI: I would not expose SECRET_KEY in real environment.
 ![React-App](https://user-images.githubusercontent.com/23028687/119269413-e0564b00-bbf7-11eb-9828-41ec8d18f38f.gif
 )
 
-https://www.loom.com/share/93238bc5320e4f6299358c16573c253b
-
 ## App implementation
 
 1. Data from csv is loaded into the database.
