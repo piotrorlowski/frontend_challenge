@@ -114,7 +114,7 @@ const App = () => {
         onButtonClick={onButtonClick}
         onPageSizeChange={onPageSizeChange}
       />
-      <Chart data={data} />
+      <Chart data={data} dataSources={dataSources} campaigns={campaigns} />
     </div>
   );
 };

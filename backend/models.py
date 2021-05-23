@@ -12,6 +12,8 @@ class Data(models.Model):
     created = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """Meta options for Data model."""
+
         ordering = ["created"]
 
 
@@ -21,4 +23,6 @@ class Campaign(models.Model):
     name = models.CharField(max_length=200, default="")
 
     class Meta:
+        """Meta options for Campaign model."""
+
         ordering = ["name"]
