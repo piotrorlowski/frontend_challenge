@@ -32,9 +32,11 @@ const Chart = (props) => {
     return `${dateObj.getDate()}. ${months[dateObj.getMonth()]}`;
   });
 
-  const chosenCampaigns = campaigns.length ? campaigns.join(", ") : "All";
+  const ALL = "All";
 
-  const chosenDataSources = dataSources.length ? dataSources.join(", ") : "All";
+  const chosenCampaigns = campaigns.length ? campaigns.join(", ") : ALL;
+
+  const chosenDataSources = dataSources.length ? dataSources.join(", ") : ALL;
 
   const chartTitle = `Datasources: ${chosenDataSources}; ${chosenCampaigns} Campaigns`;
 
@@ -49,7 +51,7 @@ const Chart = (props) => {
     xAxis: {
       type: "datetime",
       categories: date,
-      tickInterval: 3,
+      tickInterval: 2,
     },
     yAxis: [
       {

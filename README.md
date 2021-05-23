@@ -40,7 +40,7 @@ FYI: I would not expose SECRET_KEY in real environment.
 
 1. Data from csv is loaded into the database.
 2. Data is serialized with the Django REST Framework and accessible at `/data/` and `/campaigns/` endpoints.
-3. The `/data/` endpoint is for fetching different (csv) data.
+3. The `/data/` endpoint is for fetching different data.
 4. The `/campaigns/` endpoint is mostly for fetching campaings options for the react select component (multiselect for selecting different campaigns).
 5. There were 4 unique datasources, so I hardcoded them instead to fetch them from backend as it wasn't worth the effort at this point (file with extracted unique datasources can be viewed here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/datasource.txt, I removed it later as it wasn't needed).
 6. In contrary to datasources there were 1828 unique campaigns, so I extracted them and created data model for them to store in db (file can be visible here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/campaign.txt, I removed it later as it wasn't needed).
