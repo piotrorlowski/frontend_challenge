@@ -34,8 +34,7 @@ FYI: I would not expose SECRET_KEY in real environment.
 
 # Description and usage
 
-![React-App](https://user-images.githubusercontent.com/23028687/119269413-e0564b00-bbf7-11eb-9828-41ec8d18f38f.gif
-)
+![React-App](https://user-images.githubusercontent.com/23028687/119269413-e0564b00-bbf7-11eb-9828-41ec8d18f38f.gif)
 
 ## App implementation
 
