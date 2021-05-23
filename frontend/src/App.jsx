@@ -9,7 +9,7 @@ import Sidebar from "./components/Sidebar";
 const App = () => {
   const [data, setData] = useState([]);
   const [campaignsList, setCampaignsList] = useState([]);
-  const [dataSource, setDataSource] = useState([]);
+  const [dataSources, setDataSources] = useState([]);
   const [campaigns, setCampaigns] = useState([]);
   const [pageSize, setPageSize] = useState(10);
 
@@ -39,8 +39,8 @@ const App = () => {
     if (pageSize) {
       fetchedUrl = `${fetchedUrl}?page_size=${pageSize}`;
     }
-    if (dataSource.length) {
-      fetchedUrl = `${fetchedUrl}&datasource__in=${dataSource.join(",")}`;
+    if (dataSources.length) {
+      fetchedUrl = `${fetchedUrl}&datasource__in=${dataSources}`;
     }
     if (campaigns.length) {
       fetchedUrl = `${fetchedUrl}&campaign__in=${campaigns}`;
@@ -71,7 +71,7 @@ const App = () => {
    */
   const onSelectDataSource = (event) => {
     const dataSourceValues = event.map((item) => item.value);
-    setDataSource(dataSourceValues);
+    setDataSources(dataSourceValues);
   };
 
   /**
