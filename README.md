@@ -2,6 +2,8 @@
 
 ## Docker
 
+FYI: I would not expose SECRET_KEY in real environment.
+
 1. `git clone git@github.com:piotrorlowski/frontend_challenge.git && cd frontend_challenge && touch .env`.
 2.  in `.env` put:
 
