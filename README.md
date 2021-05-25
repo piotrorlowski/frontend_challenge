@@ -45,13 +45,12 @@ FYI: I would not expose SECRET_KEY in real environment.
 5. There were 4 unique datasources, so I hardcoded them instead to fetch them from backend as it wasn't worth the effort at this point (file with extracted unique datasources can be viewed here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/datasource.txt, I removed it later as it wasn't needed).
 6. In contrary to datasources there were 1828 unique campaigns, so I extracted them and created data model for them to store in db (file can be visible here https://github.com/piotrorlowski/frontend_challenge/blob/de3c41159c52cd5edbc267c4358f7fcd534cff73/campaign.txt, I removed it later as it wasn't needed).
 7. I had to somehow control the number of requested objects, so I added 'Page size' input to manually control how many results I would like to get for data chart.
-8. I tried to reflect the look of the chart from the document as much as I could though I don't have much experience in handling charts, especially as react libraries.
-9. There isn't much styling in terms of RWD, but there could be, so data could be viewed on mobile devices with better UX, so better view it on desktop monitor.
-10. I used the functional components approach and I used react hooks for handling state, though I don't have much experience with it (on daily basis I work in VueJS), so it probably could be improved.
-11. I had some issues with axios as at the first aproach I wanted to just pass dynamic params to axios.get() but later it resolved that combined multiple choices (datasources and campaigns) had their spaces replaced by '+' instead of '%20' and '+' couldn't be read properly by DRF, so I decided to write some function to create dynamic urls for the requests.
-12. I built three components `App.jsx` (main logic and state holder), `Sidebar.jsx` (as name suggests - sidebar with different data manipulation options) and `Chart.jsx` (chart for showing data).
-13. I included linters and linted code both for frontend and backend.
-14. I wrote some tests both for frontend and backend.
+8. There isn't much styling in terms of RWD, but there could be, so data could be viewed on mobile devices with better UX, so better view it on desktop monitor.
+9. I used the functional components approach and I used react hooks for handling state, though I don't have much experience with it (on daily basis I work in VueJS), so it probably could be improved.
+10. I had some issues with axios as at the first aproach I wanted to just pass dynamic params to axios.get() but later it resolved that combined multiple choices (datasources and campaigns) had their spaces replaced by '+' instead of '%20' and '+' couldn't be read properly by DRF, so I decided to write some function to create dynamic urls for the requests.
+11. I built three components `App.jsx` (main logic and state holder), `Sidebar.jsx` (as name suggests - sidebar with different data manipulation options) and `Chart.jsx` (chart for showing data).
+12. I included linters and linted code both for frontend and backend.
+13. I wrote some tests both for frontend and backend.
 
 ## UI and features explanation
 
