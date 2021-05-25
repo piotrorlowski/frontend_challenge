@@ -1,12 +1,13 @@
 import "../assets/Sidebar.scss";
 
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
 
 const Sidebar = (props) => {
   const {
+    error,
     campaignsList,
     onSelectDataSource,
     onSelectCampaign,
@@ -74,16 +75,18 @@ const Sidebar = (props) => {
             defaultOptions={[campaignDefaultValue]}
             onChange={onSelectCampaign}
           />
-          <h3 className="Sidebar-selectLabel">Page size</h3>
+          <h3 className="Sidebar-selectLabel">Page size (min 1, max 100)</h3>
           <input
             className="Sidebar-input"
             type="number"
             defaultValue={defaultPageSize}
             onChange={onPageSizeChange}
           />
+          <p className="SideBar-error">{error}</p>
         </div>
         <button
           type="button"
+          disabled={!!error}
           className="Sidebar-button"
           onClick={onButtonClick}
         >
@@ -97,9 +100,10 @@ const Sidebar = (props) => {
 Sidebar.propTypes = {
   campaignsList: PropTypes.arrayOf(
     PropTypes.shape({
-      name: string,
+      name: String,
     })
   ),
+  error: String,
   onSelectDataSource: PropTypes.func,
   onSelectCampaign: PropTypes.func,
   onPageSizeChange: PropTypes.func,
@@ -108,6 +112,7 @@ Sidebar.propTypes = {
 
 Sidebar.defaultProps = {
   campaignsList: [],
+  error: "",
   onSelectDataSource: () => {},
   onSelectCampaign: () => {},
   onPageSizeChange: () => {},

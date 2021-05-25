@@ -12,6 +12,7 @@ const App = () => {
   const [dataSources, setDataSources] = useState([]);
   const [campaigns, setCampaigns] = useState([]);
   const [pageSize, setPageSize] = useState(10);
+  const [error, setError] = useState("");
 
   const baseDataUrl = "http://localhost:8000/api/data/";
   const baseCampaignUrl = "http://localhost:8000/api/campaign/";
@@ -93,6 +94,13 @@ const App = () => {
    */
   const onPageSizeChange = (event) => {
     const pageSizeValue = event.target.value;
+    if (pageSizeValue > 100 || pageSizeValue <= 0) {
+      setError(
+        "Page size has to be lower than or equal to 100 and bigger than 0."
+      );
+    } else {
+      setError("");
+    }
     setPageSize(pageSizeValue);
   };
 
@@ -108,6 +116,7 @@ const App = () => {
   return (
     <div className="App">
       <Sidebar
+        error={error}
         campaignsList={campaignsList}
         onSelectDataSource={onSelectDataSource}
         onSelectCampaign={onSelectCampaign}

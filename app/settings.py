@@ -127,7 +127,7 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": [
         "url_filter.integrations.drf.DjangoFilterBackend",
     ],
-    "PAGE_SIZE": 2000,
+    "PAGE_SIZE": 100,
 }
 
 CORS_ORIGIN_WHITELIST = env.tuple("CORS_ORIGIN_WHITELIST")

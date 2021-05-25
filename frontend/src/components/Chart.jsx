@@ -2,7 +2,7 @@ import "../assets/Chart.scss";
 
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 const Chart = (props) => {
@@ -94,15 +94,15 @@ const Chart = (props) => {
 Chart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      date: string,
-      datasource: string,
-      campaign: string,
-      clicks: string,
-      impressions: string,
+      date: String,
+      datasource: String,
+      campaign: String,
+      clicks: Number,
+      impressions: Number,
     })
   ),
-  dataSources: PropTypes.arrayOf(string),
-  campaigns: PropTypes.arrayOf(string),
+  dataSources: PropTypes.arrayOf(String),
+  campaigns: PropTypes.arrayOf(String),
 };
 
 Chart.defaultProps = {
