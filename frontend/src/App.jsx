@@ -95,9 +95,7 @@ const App = () => {
   const onPageSizeChange = (event) => {
     const pageSizeValue = event.target.value;
     if (pageSizeValue > 100 || pageSizeValue <= 0) {
-      setError(
-        "Page size has to be lower than or equal to 100 and bigger than 0."
-      );
+      setError("Page size has to be bigger than 0 and lower/equal to 100.");
     } else {
       setError("");
     }
