@@ -12,7 +12,7 @@ const App = () => {
   const [dataSources, setDataSources] = useState([]);
   const [campaigns, setCampaigns] = useState([]);
   const [pageSize, setPageSize] = useState(10);
-  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const baseDataUrl = "http://localhost:8000/api/data/";
   const baseCampaignUrl = "http://localhost:8000/api/campaign/";
@@ -36,17 +36,17 @@ const App = () => {
    * @returns {string} - url for the axios request
    */
   const fetchUrl = (url) => {
-    let fetchedUrl = url;
+    const fetchedUrl = [url];
     if (pageSize) {
-      fetchedUrl = `${fetchedUrl}?page_size=${pageSize}`;
+      fetchedUrl.push(`?page_size=${pageSize}`);
     }
     if (dataSources.length) {
-      fetchedUrl = `${fetchedUrl}&datasource__in=${dataSources}`;
+      fetchedUrl.push(`&datasource__in=${dataSources}`);
     }
     if (campaigns.length) {
-      fetchedUrl = `${fetchedUrl}&campaign__in=${campaigns}`;
+      fetchedUrl.push(`&campaign__in=${campaigns}`);
     }
-    return fetchedUrl;
+    return fetchedUrl.join("");
   };
 
   /**
@@ -95,9 +95,9 @@ const App = () => {
   const onPageSizeChange = (event) => {
     const pageSizeValue = event.target.value;
     if (pageSizeValue > 100 || pageSizeValue <= 0) {
-      setError("Page size has to be bigger than 0 and lower/equal to 100.");
+      setErrorMsg("Page size has to be bigger than 0 and lower/equal to 100.");
     } else {
-      setError("");
+      setErrorMsg("");
     }
     setPageSize(pageSizeValue);
   };
@@ -114,7 +114,7 @@ const App = () => {
   return (
     <div className="App">
       <Sidebar
-        error={error}
+        errorMsg={errorMsg}
         campaignsList={campaignsList}
         onSelectDataSource={onSelectDataSource}
         onSelectCampaign={onSelectCampaign}

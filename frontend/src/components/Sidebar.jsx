@@ -7,7 +7,7 @@ import AsyncSelect from "react-select/async";
 
 const Sidebar = (props) => {
   const {
-    error,
+    errorMsg,
     campaignsList,
     onSelectDataSource,
     onSelectCampaign,
@@ -82,11 +82,11 @@ const Sidebar = (props) => {
             defaultValue={defaultPageSize}
             onChange={onPageSizeChange}
           />
-          <p className="SideBar-error">{error}</p>
+          <p className="SideBar-error">{errorMsg}</p>
         </div>
         <button
           type="button"
-          disabled={!!error}
+          disabled={!!errorMsg}
           className="Sidebar-button"
           onClick={onButtonClick}
         >
@@ -100,10 +100,10 @@ const Sidebar = (props) => {
 Sidebar.propTypes = {
   campaignsList: PropTypes.arrayOf(
     PropTypes.shape({
-      name: String,
+      name: PropTypes.string,
     })
   ),
-  error: String,
+  errorMsg: PropTypes.string,
   onSelectDataSource: PropTypes.func,
   onSelectCampaign: PropTypes.func,
   onPageSizeChange: PropTypes.func,
@@ -112,7 +112,7 @@ Sidebar.propTypes = {
 
 Sidebar.defaultProps = {
   campaignsList: [],
-  error: "",
+  errorMsg: "",
   onSelectDataSource: () => {},
   onSelectCampaign: () => {},
   onPageSizeChange: () => {},
