@@ -6,9 +6,6 @@ from backend.models import Campaign, Data
 class DataSerializer(serializers.ModelSerializer):
     """Model serializer for Data."""
 
-    clicks = serializers.IntegerField()
-    impressions = serializers.IntegerField()
-
     class Meta:
         """Meta options for DataSerializer."""
 
