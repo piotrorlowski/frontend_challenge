@@ -1,21 +1,32 @@
 import "./assets/App.scss";
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Chart from "./components/Chart";
 import Sidebar from "./components/Sidebar";
 
 const App = () => {
+  const baseDataUrl = "http://localhost:8000/api/data/";
+  const baseCampaignUrl = "http://localhost:8000/api/campaign/";
+
   const [data, setData] = useState([]);
   const [campaignsList, setCampaignsList] = useState([]);
   const [dataSources, setDataSources] = useState([]);
   const [campaigns, setCampaigns] = useState([]);
   const [pageSize, setPageSize] = useState(10);
   const [errorMsg, setErrorMsg] = useState("");
+  const [dataUrl, setDataUrl] = useState(baseDataUrl);
 
-  const baseDataUrl = "http://localhost:8000/api/data/";
-  const baseCampaignUrl = "http://localhost:8000/api/campaign/";
+  const latestBaseDataUrl = useRef(dataUrl);
+
+  /**
+   * Function for detecting url change.
+   * @param {string} prevUrl - prevUrl
+   * @param {string} nextUrl - nextUrl
+   * @returns {boolean} - true if urls are different
+   */
+  const areUrlsDifferent = (prevUrl, nextUrl) => prevUrl !== nextUrl;
 
   /**
    * Function for getting data from the API.
@@ -55,16 +66,18 @@ const App = () => {
    */
   useEffect(() => {
     async function fetchData() {
-      if (!data.length) {
-        const url = fetchUrl(baseDataUrl);
-        setData(await getData(url));
+      if (
+        !data.length ||
+        areUrlsDifferent(latestBaseDataUrl.current, dataUrl)
+      ) {
+        setData(await getData(dataUrl));
       }
-      if (!campaigns.length) {
+      if (!campaignsList.length) {
         setCampaignsList(await getData(baseCampaignUrl));
       }
     }
     fetchData();
-  }, []);
+  }, [dataUrl]);
 
   /**
    * Handler function for 'datasource' select element.
@@ -80,12 +93,10 @@ const App = () => {
    * Updates campaigns with the values picked by the user in Sidebar.
    */
   const onSelectCampaign = (event) => {
-    const campaignsValues = event.map((campaign) => campaign.value);
-    // Exclude 'All' from saving into campaignValues state.
-    // 'All' value fetches all results as it's value is an empty string.
-    if (!(campaignsValues.length === 1 && campaignsValues[0] === "")) {
-      setCampaigns(campaignsValues);
-    }
+    const campaignsValues = event
+      .map((campaign) => campaign.value)
+      .filter((value) => value);
+    setCampaigns(campaignsValues);
   };
 
   /**
@@ -94,21 +105,23 @@ const App = () => {
    */
   const onPageSizeChange = (event) => {
     const pageSizeValue = event.target.value;
-    if (pageSizeValue > 100 || pageSizeValue <= 0) {
-      setErrorMsg("Page size has to be bigger than 0 and lower/equal to 100.");
-    } else {
-      setErrorMsg("");
-    }
+    const errorMessage =
+      pageSizeValue > 100 || pageSizeValue <= 0
+        ? "Page size has to be bigger than 0 and lower/equal to 100."
+        : "";
+    setErrorMsg(errorMessage);
     setPageSize(pageSizeValue);
   };
 
   /**
    * Handler function for sidebar button.
-   * Responsible for sending request to endpoint with applied parameters.
+   * Responsible for setting url with new params.
+   * When a new url is created, request is sent to fetch new data.
+   * Sending request for new data is handled by useEffect.
    */
   const onButtonClick = async () => {
-    const url = fetchUrl(baseDataUrl);
-    setData(await getData(url));
+    latestBaseDataUrl.current = dataUrl;
+    setDataUrl(fetchUrl(baseDataUrl));
   };
 
   return (
