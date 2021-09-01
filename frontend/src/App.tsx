@@ -1,19 +1,19 @@
 import "./assets/App.scss";
 
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 import Chart from "./components/Chart";
 import Sidebar from "./components/Sidebar";
 
-const App = () => {
+const App: React.FC = (): ReactElement => {
   const baseDataUrl = "http://localhost:8000/api/data/";
   const baseCampaignUrl = "http://localhost:8000/api/campaign/";
 
   const [data, setData] = useState([]);
   const [campaignsList, setCampaignsList] = useState([]);
-  const [dataSources, setDataSources] = useState([]);
-  const [campaigns, setCampaigns] = useState([]);
+  const [dataSources, setDataSources] = useState<string[]>([]);
+  const [campaigns, setCampaigns] = useState<string[]>([]);
   const [pageSize, setPageSize] = useState(10);
   const [errorMsg, setErrorMsg] = useState("");
   const [dataUrl, setDataUrl] = useState(baseDataUrl);
@@ -22,18 +22,14 @@ const App = () => {
 
   /**
    * Function for detecting url change.
-   * @param {string} prevUrl - prevUrl
-   * @param {string} nextUrl - nextUrl
-   * @returns {boolean} - true if urls are different
    */
-  const areUrlsDifferent = (prevUrl, nextUrl) => prevUrl !== nextUrl;
+  const areUrlsDifferent = (prevUrl: string, nextUrl: string): boolean =>
+    prevUrl !== nextUrl;
 
   /**
-   * Function for getting data from the API.
-   * @param {string} url - api endpoint url
-   * @returns {Promise} - returns axios promise
+   * Function for getting data from API.
    */
-  const getData = async (url) => {
+  const getData = async (url: string): Promise<[]> => {
     const response = await axios.get(url);
     return response.data.results;
   };
@@ -43,10 +39,8 @@ const App = () => {
    * Axios was replacing spaces with '+' which was not read
    * correctly by DRF api. This function creates url for fetching
    * data by appending strings with dynamic values.
-   * @param {string} url - base api url
-   * @returns {string} - url for the axios request
    */
-  const fetchUrl = (url) => {
+  const fetchUrl = (url: string): string => {
     const fetchedUrl = [url];
     if (pageSize) {
       fetchedUrl.push(`?page_size=${pageSize}`);
@@ -83,8 +77,8 @@ const App = () => {
    * Handler function for 'datasource' select element.
    * Updates dataSource with the values picked by the user in Sidebar.
    */
-  const onSelectDataSource = (event) => {
-    const dataSourceValues = event.map((item) => item.value);
+  const onSelectDataSource = (items: { value: string }[]): void => {
+    const dataSourceValues = items.map((item) => item.value);
     setDataSources(dataSourceValues);
   };
 
@@ -92,19 +86,19 @@ const App = () => {
    * Handler function for 'campaign' select element.
    * Updates campaigns with the values picked by the user in Sidebar.
    */
-  const onSelectCampaign = (event) => {
-    const campaignsValues = event
+  const onSelectCampaign = (items: { value: string }[]) => {
+    const campaignsValues = items
       .map((campaign) => campaign.value)
       .filter((value) => value);
     setCampaigns(campaignsValues);
   };
 
   /**
-   * Handler function for 'page size' select element.
-   * Updates pageSize with the values picked by the user in Sidebar.
+   * Handler function for 'page size' input.
+   * Updates pageSize with the value entered in input.
    */
-  const onPageSizeChange = (event) => {
-    const pageSizeValue = event.target.value;
+  const onPageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const pageSizeValue = parseInt(event.target.value, 10);
     const errorMessage =
       pageSizeValue > 100 || pageSizeValue <= 0
         ? "Page size has to be bigger than 0 and lower/equal to 100."
@@ -119,7 +113,7 @@ const App = () => {
    * When a new url is created, request is sent to fetch new data.
    * Sending request for new data is handled by useEffect.
    */
-  const onButtonClick = async () => {
+  const onButtonClick = async (): Promise<void> => {
     latestBaseDataUrl.current = dataUrl;
     setDataUrl(fetchUrl(baseDataUrl));
   };
