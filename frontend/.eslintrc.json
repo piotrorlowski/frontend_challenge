@@ -1,10 +1,12 @@
 {
   "extends": [
     "airbnb",
+    "prettier",
     "eslint:recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier", "plugin:node/recommended", "plugin:react-hooks/recommended"
+    "plugin:node/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "plugins": ["prettier", "simple-import-sort", "jest"],
   "rules": {
