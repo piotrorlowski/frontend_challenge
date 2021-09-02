@@ -31,7 +31,6 @@
       "double"
     ],
     "prettier/prettier": "error",
-    "no-unused-vars": "warn",
     "no-console": "warn",
     "func-names": "warn",
     "no-process-exit": "warn",
@@ -43,6 +42,8 @@
     ],
     "simple-import-sort/imports": "error",
     "no-use-before-define": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     "@typescript-eslint/no-use-before-define": ["error"],
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": ["error", {

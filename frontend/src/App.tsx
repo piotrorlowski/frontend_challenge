@@ -5,18 +5,19 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 import Chart from "./components/Chart";
 import Sidebar from "./components/Sidebar";
+import { Campaign, DataSource } from "./types/types";
 
 const App: React.FC = (): ReactElement => {
   const baseDataUrl = "http://localhost:8000/api/data/";
   const baseCampaignUrl = "http://localhost:8000/api/campaign/";
 
   const [data, setData] = useState([]);
-  const [campaignsList, setCampaignsList] = useState([]);
+  const [campaignsList, setCampaignsList] = useState<Campaign[]>([]);
   const [dataSources, setDataSources] = useState<string[]>([]);
   const [campaigns, setCampaigns] = useState<string[]>([]);
-  const [pageSize, setPageSize] = useState(10);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [dataUrl, setDataUrl] = useState(baseDataUrl);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [dataUrl, setDataUrl] = useState<string>(baseDataUrl);
 
   const latestBaseDataUrl = useRef(dataUrl);
 
@@ -77,8 +78,12 @@ const App: React.FC = (): ReactElement => {
    * Handler function for 'datasource' select element.
    * Updates dataSource with the values picked by the user in Sidebar.
    */
-  const onSelectDataSource = (items: { value: string }[]): void => {
-    const dataSourceValues = items.map((item) => item.value);
+  const onSelectDataSource = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    const dataSourceValues = [event.target.selectedOptions].map(
+      (item) => item.value
+    );
     setDataSources(dataSourceValues);
   };
 
@@ -86,8 +91,10 @@ const App: React.FC = (): ReactElement => {
    * Handler function for 'campaign' select element.
    * Updates campaigns with the values picked by the user in Sidebar.
    */
-  const onSelectCampaign = (items: { value: string }[]) => {
-    const campaignsValues = items
+  const onSelectCampaign = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    const campaignsValues = event
       .map((campaign) => campaign.value)
       .filter((value) => value);
     setCampaigns(campaignsValues);
@@ -97,7 +104,9 @@ const App: React.FC = (): ReactElement => {
    * Handler function for 'page size' input.
    * Updates pageSize with the value entered in input.
    */
-  const onPageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onPageSizeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const pageSizeValue = parseInt(event.target.value, 10);
     const errorMessage =
       pageSizeValue > 100 || pageSizeValue <= 0
@@ -122,7 +131,7 @@ const App: React.FC = (): ReactElement => {
     <div className="App">
       <Sidebar
         errorMsg={errorMsg}
-        campaignsList={campaignsList}
+        campaignsList={campaignsList as Campaign[]}
         onSelectDataSource={onSelectDataSource}
         onSelectCampaign={onSelectCampaign}
         onButtonClick={onButtonClick}

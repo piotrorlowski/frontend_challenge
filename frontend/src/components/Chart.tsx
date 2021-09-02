@@ -3,11 +3,17 @@ import "../assets/Chart.scss";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { ReactElement } from "react";
 
-const Chart = (props) => {
-  const { data, dataSources, campaigns } = props;
+import { Data } from "../types/types";
 
+type Props = {
+  data: Data[];
+  dataSources: string[];
+  campaigns: string[];
+};
+
+const Chart = ({ data, dataSources, campaigns }: Props): ReactElement => {
   const clicks = data.map((item) => item.clicks);
 
   const impressions = data.map((item) => item.impressions);
@@ -94,15 +100,15 @@ const Chart = (props) => {
 Chart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      date: String,
-      datasource: String,
-      campaign: String,
-      clicks: Number,
-      impressions: Number,
+      date: PropTypes.string,
+      datasource: PropTypes.string,
+      campaign: PropTypes.string,
+      clicks: PropTypes.number,
+      impressions: PropTypes.number,
     })
   ),
-  dataSources: PropTypes.arrayOf(String),
-  campaigns: PropTypes.arrayOf(String),
+  dataSources: PropTypes.arrayOf(PropTypes.string),
+  campaigns: PropTypes.arrayOf(PropTypes.string),
 };
 
 Chart.defaultProps = {

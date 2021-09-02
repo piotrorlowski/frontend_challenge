@@ -1,20 +1,35 @@
 import "../assets/Sidebar.scss";
 
 import PropTypes from "prop-types";
-import React from "react";
+import React, { MouseEventHandler, ReactElement } from "react";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
 
-const Sidebar = (props) => {
-  const {
-    errorMsg,
-    campaignsList,
-    onSelectDataSource,
-    onSelectCampaign,
-    onPageSizeChange,
-    onButtonClick,
-  } = props;
+import {
+  Callback,
+  Campaign,
+  CampaignOptions,
+  InputEventHandlerFunction,
+  SelectEventHandlerFunction,
+} from "../types/types";
 
+type Props = {
+  errorMsg: string;
+  campaignsList: Campaign[];
+  onSelectDataSource: SelectEventHandlerFunction;
+  onSelectCampaign: SelectEventHandlerFunction;
+  onPageSizeChange: InputEventHandlerFunction;
+  onButtonClick: MouseEventHandler<HTMLButtonElement>;
+};
+
+const Sidebar = ({
+  errorMsg,
+  campaignsList,
+  onSelectDataSource,
+  onSelectCampaign,
+  onPageSizeChange,
+  onButtonClick,
+}: Props): ReactElement => {
   const dataSourceOptions = [
     { value: "Google Adwords", label: "Google Adwords" },
     { value: "Google Analytics", label: "Google Analytics" },
@@ -33,9 +48,8 @@ const Sidebar = (props) => {
 
   /**
    * Function for filtering 'campaign' options results.
-   * @param {string} inputValue - value picked by user in select component
    */
-  const filterOptions = (inputValue) =>
+  const filterOptions = (inputValue: string): CampaignOptions[] =>
     campaignOptions.filter((item) =>
       item.label.toLowerCase().includes(inputValue.toLowerCase())
     );
@@ -43,10 +57,8 @@ const Sidebar = (props) => {
   /**
    * Function for loading filtered 'campaign' results
    * into searchable select component.
-   * @param {string} inputValue - value picked by user in select component
-   * @param {Function} callback - callback function
    */
-  const loadOptions = (inputValue, callback) => {
+  const loadOptions = (inputValue: string, callback: Callback) => {
     setTimeout(() => {
       callback(filterOptions(inputValue));
     }, 1000);
