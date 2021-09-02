@@ -1,4 +1,5 @@
 import React from "react";
+import { ActionMeta, OptionsType } from "react-select";
 
 export type Data = {
   clicks: number;
@@ -25,10 +26,22 @@ export type CampaignOptions = {
 
 export type Callback = <T1>(param: T1) => void;
 
-export type InputEventHandlerFunction = (
+export type OnInputChange = (
   event: React.ChangeEvent<HTMLInputElement>
 ) => void;
 
-export type SelectEventHandlerFunction = (
-  event: React.ChangeEvent<HTMLSelectElement>
+export type OnSelectChange = (
+  value: OptionsType<{
+    value: string;
+    label: string;
+  }>,
+  actionMeta: ActionMeta<{
+    value: string;
+    label: string;
+  }>
 ) => void;
+
+export type SelectOption = {
+  value: string;
+  label: string;
+};

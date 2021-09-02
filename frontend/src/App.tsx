@@ -2,10 +2,11 @@ import "./assets/App.scss";
 
 import axios from "axios";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { ActionMeta, OptionsType } from "react-select";
 
 import Chart from "./components/Chart";
 import Sidebar from "./components/Sidebar";
-import { Campaign, DataSource } from "./types/types";
+import { Campaign, SelectOption } from "./types/types";
 
 const App: React.FC = (): ReactElement => {
   const baseDataUrl = "http://localhost:8000/api/data/";
@@ -79,11 +80,17 @@ const App: React.FC = (): ReactElement => {
    * Updates dataSource with the values picked by the user in Sidebar.
    */
   const onSelectDataSource = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    value: OptionsType<{
+      value: string;
+      label: string;
+    }>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    actionMeta: ActionMeta<{
+      value: string;
+      label: string;
+    }>
   ): void => {
-    const dataSourceValues = [event.target.selectedOptions].map(
-      (item) => item.value
-    );
+    const dataSourceValues = value.map((item: SelectOption) => item.value);
     setDataSources(dataSourceValues);
   };
 
@@ -92,11 +99,19 @@ const App: React.FC = (): ReactElement => {
    * Updates campaigns with the values picked by the user in Sidebar.
    */
   const onSelectCampaign = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    value: OptionsType<{
+      value: string;
+      label: string;
+    }>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    actionMeta: ActionMeta<{
+      value: string;
+      label: string;
+    }>
   ): void => {
-    const campaignsValues = event
-      .map((campaign) => campaign.value)
-      .filter((value) => value);
+    const campaignsValues = value
+      .map((item: SelectOption) => item.value)
+      .filter((item: string) => item);
     setCampaigns(campaignsValues);
   };
 

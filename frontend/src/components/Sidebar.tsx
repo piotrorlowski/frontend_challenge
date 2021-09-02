@@ -6,19 +6,18 @@ import Select from "react-select";
 import AsyncSelect from "react-select/async";
 
 import {
-  Callback,
   Campaign,
   CampaignOptions,
-  InputEventHandlerFunction,
-  SelectEventHandlerFunction,
+  OnInputChange,
+  OnSelectChange,
 } from "../types/types";
 
 type Props = {
   errorMsg: string;
   campaignsList: Campaign[];
-  onSelectDataSource: SelectEventHandlerFunction;
-  onSelectCampaign: SelectEventHandlerFunction;
-  onPageSizeChange: InputEventHandlerFunction;
+  onSelectDataSource: OnSelectChange;
+  onSelectCampaign: OnSelectChange;
+  onPageSizeChange: OnInputChange;
   onButtonClick: MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -58,7 +57,10 @@ const Sidebar = ({
    * Function for loading filtered 'campaign' results
    * into searchable select component.
    */
-  const loadOptions = (inputValue: string, callback: Callback) => {
+  const loadOptions = (
+    inputValue: string,
+    callback: (item: CampaignOptions[]) => void
+  ) => {
     setTimeout(() => {
       callback(filterOptions(inputValue));
     }, 1000);
