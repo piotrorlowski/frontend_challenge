@@ -24,8 +24,6 @@ export type CampaignOptions = {
   label: string;
 };
 
-export type Callback = <T1>(param: T1) => void;
-
 export type OnInputChange = (
   event: React.ChangeEvent<HTMLInputElement>
 ) => void;
