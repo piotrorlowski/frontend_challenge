@@ -1,38 +1,40 @@
 import "./assets/App.scss";
 
 import axios from "axios";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import * as React from "react";
 import { ActionMeta, OptionsType } from "react-select";
 
 import Chart from "./components/Chart";
 import Sidebar from "./components/Sidebar";
-import { Campaign, SelectOption } from "./types/types";
+import { Campaign, Data, SelectOption } from "./types/types";
 
-const App: React.FC = (): ReactElement => {
-  const baseDataUrl = "http://localhost:8000/api/data/";
-  const baseCampaignUrl = "http://localhost:8000/api/campaign/";
+const baseDataUrl = "http://localhost:8000/api/data/";
+const baseCampaignUrl = "http://localhost:8000/api/campaign/";
 
-  const [data, setData] = useState([]);
-  const [campaignsList, setCampaignsList] = useState<Campaign[]>([]);
-  const [dataSources, setDataSources] = useState<string[]>([]);
-  const [campaigns, setCampaigns] = useState<string[]>([]);
-  const [pageSize, setPageSize] = useState<number>(10);
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const [dataUrl, setDataUrl] = useState<string>(baseDataUrl);
+const App = (): React.ReactElement => {
+  const [data, setData] = React.useState<ReadonlyArray<Data>>([]);
+  const [campaignsList, setCampaignsList] = React.useState<
+    ReadonlyArray<Campaign>
+  >([]);
+  const [dataSources, setDataSources] = React.useState<string[]>([]);
+  const [campaigns, setCampaigns] = React.useState<string[]>([]);
+  const [pageSize, setPageSize] = React.useState(10);
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const [dataUrl, setDataUrl] = React.useState(baseDataUrl);
 
-  const latestBaseDataUrl = useRef(dataUrl);
+  const latestBaseDataUrl = React.useRef(dataUrl);
 
   /**
    * Function for detecting url change.
    */
-  const areUrlsDifferent = (prevUrl: string, nextUrl: string): boolean =>
+  const areUrlsDifferent = (prevUrl: string, nextUrl: string) =>
     prevUrl !== nextUrl;
 
   /**
    * Function for getting data from API.
    */
-  const getData = async (url: string): Promise<[]> => {
-    const response = await axios.get(url);
+  const getData = async <T extends Record<string, unknown>>(url: string) => {
+    const response = await axios.get<{ results: ReadonlyArray<T> }>(url);
     return response.data.results;
   };
 
@@ -42,7 +44,7 @@ const App: React.FC = (): ReactElement => {
    * correctly by DRF api. This function creates url for fetching
    * data by appending strings with dynamic values.
    */
-  const fetchUrl = (url: string): string => {
+  const fetchUrl = (url: string) => {
     const fetchedUrl = [url];
     if (pageSize) {
       fetchedUrl.push(`?page_size=${pageSize}`);
@@ -60,7 +62,7 @@ const App: React.FC = (): ReactElement => {
    * useEffect react hook for performing side effects
    * in function components.
    */
-  useEffect(() => {
+  React.useEffect(() => {
     async function fetchData() {
       if (
         !data.length ||
@@ -89,7 +91,7 @@ const App: React.FC = (): ReactElement => {
       value: string;
       label: string;
     }>
-  ): void => {
+  ) => {
     const dataSourceValues = value.map((item: SelectOption) => item.value);
     setDataSources(dataSourceValues);
   };
@@ -102,13 +104,8 @@ const App: React.FC = (): ReactElement => {
     value: OptionsType<{
       value: string;
       label: string;
-    }>,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    actionMeta: ActionMeta<{
-      value: string;
-      label: string;
     }>
-  ): void => {
+  ) => {
     const campaignsValues = value
       .map((item: SelectOption) => item.value)
       .filter((item: string) => item);
@@ -119,9 +116,7 @@ const App: React.FC = (): ReactElement => {
    * Handler function for 'page size' input.
    * Updates pageSize with the value entered in input.
    */
-  const onPageSizeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const onPageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const pageSizeValue = parseInt(event.target.value, 10);
     const errorMessage =
       pageSizeValue > 100 || pageSizeValue <= 0

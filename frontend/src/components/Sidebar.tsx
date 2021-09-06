@@ -1,7 +1,7 @@
 import "../assets/Sidebar.scss";
 
 import PropTypes from "prop-types";
-import React, { MouseEventHandler, ReactElement } from "react";
+import * as React from "react";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
 
@@ -18,7 +18,7 @@ type Props = {
   onSelectDataSource: OnSelectChange;
   onSelectCampaign: OnSelectChange;
   onPageSizeChange: OnInputChange;
-  onButtonClick: MouseEventHandler<HTMLButtonElement>;
+  onButtonClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Sidebar = ({
@@ -28,7 +28,7 @@ const Sidebar = ({
   onSelectCampaign,
   onPageSizeChange,
   onButtonClick,
-}: Props): ReactElement => {
+}: Props): React.ReactElement => {
   const dataSourceOptions = [
     { value: "Google Adwords", label: "Google Adwords" },
     { value: "Google Analytics", label: "Google Analytics" },

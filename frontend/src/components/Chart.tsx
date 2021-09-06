@@ -3,7 +3,7 @@ import "../assets/Chart.scss";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import PropTypes from "prop-types";
-import React, { ReactElement } from "react";
+import * as React from "react";
 
 import { Data } from "../types/types";
 
@@ -13,7 +13,7 @@ type Props = {
   campaigns: string[];
 };
 
-const Chart = ({ data, dataSources, campaigns }: Props): ReactElement => {
+const Chart = ({ data, dataSources, campaigns }: Props): React.ReactElement => {
   const clicks = data.map((item) => item.clicks);
 
   const impressions = data.map((item) => item.impressions);
