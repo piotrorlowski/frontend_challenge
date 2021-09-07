@@ -1,12 +1,12 @@
 import "./assets/App.scss";
 
-import axios from "axios";
 import * as React from "react";
-import { ActionMeta, OptionsType } from "react-select";
+import { OptionsType } from "react-select";
 
 import Chart from "./components/Chart";
 import Sidebar from "./components/Sidebar";
 import { Campaign, Data, SelectOption } from "./types/types";
+import { areUrlsDifferent, getData } from "./utils";
 
 const baseDataUrl = "http://localhost:8000/api/data/";
 const baseCampaignUrl = "http://localhost:8000/api/campaign/";
@@ -23,20 +23,6 @@ const App = (): React.ReactElement => {
   const [dataUrl, setDataUrl] = React.useState(baseDataUrl);
 
   const latestBaseDataUrl = React.useRef(dataUrl);
-
-  /**
-   * Function for detecting url change.
-   */
-  const areUrlsDifferent = (prevUrl: string, nextUrl: string) =>
-    prevUrl !== nextUrl;
-
-  /**
-   * Function for getting data from API.
-   */
-  const getData = async <T extends Record<string, unknown>>(url: string) => {
-    const response = await axios.get<{ results: ReadonlyArray<T> }>(url);
-    return response.data.results;
-  };
 
   /**
    * Workaround for replacing '+' with '%20' by axios.
@@ -81,18 +67,8 @@ const App = (): React.ReactElement => {
    * Handler function for 'datasource' select element.
    * Updates dataSource with the values picked by the user in Sidebar.
    */
-  const onSelectDataSource = (
-    value: OptionsType<{
-      value: string;
-      label: string;
-    }>,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    actionMeta: ActionMeta<{
-      value: string;
-      label: string;
-    }>
-  ) => {
-    const dataSourceValues = value.map((item: SelectOption) => item.value);
+  const onSelectDataSource = (value: OptionsType<SelectOption>) => {
+    const dataSourceValues = value.map((item) => item.value);
     setDataSources(dataSourceValues);
   };
 
@@ -100,15 +76,10 @@ const App = (): React.ReactElement => {
    * Handler function for 'campaign' select element.
    * Updates campaigns with the values picked by the user in Sidebar.
    */
-  const onSelectCampaign = (
-    value: OptionsType<{
-      value: string;
-      label: string;
-    }>
-  ) => {
+  const onSelectCampaign = (value: OptionsType<SelectOption>) => {
     const campaignsValues = value
-      .map((item: SelectOption) => item.value)
-      .filter((item: string) => item);
+      .map((item) => item.value)
+      .filter((item) => item);
     setCampaigns(campaignsValues);
   };
 
@@ -147,6 +118,8 @@ const App = (): React.ReactElement => {
         onButtonClick={onButtonClick}
         onPageSizeChange={onPageSizeChange}
       />
+      {/* TODO: The type 'readonly Data[]' is 'readonly'
+      and cannot be assigned to the mutable type 'Data[]'.ts(4104)  */}
       <Chart data={data} dataSources={dataSources} campaigns={campaigns} />
     </div>
   );

@@ -28,16 +28,7 @@ export type OnInputChange = (
   event: React.ChangeEvent<HTMLInputElement>
 ) => void;
 
-export type OnSelectChange = (
-  value: OptionsType<{
-    value: string;
-    label: string;
-  }>,
-  actionMeta: ActionMeta<{
-    value: string;
-    label: string;
-  }>
-) => void;
+export type OnSelectChange = (value: OptionsType<SelectOption>) => void;
 
 export type SelectOption = {
   value: string;

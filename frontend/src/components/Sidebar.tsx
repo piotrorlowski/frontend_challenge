@@ -1,6 +1,5 @@
 import "../assets/Sidebar.scss";
 
-import PropTypes from "prop-types";
 import * as React from "react";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
@@ -109,28 +108,6 @@ const Sidebar = ({
       </div>
     </div>
   );
-};
-
-Sidebar.propTypes = {
-  campaignsList: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-    })
-  ),
-  errorMsg: PropTypes.string,
-  onSelectDataSource: PropTypes.func,
-  onSelectCampaign: PropTypes.func,
-  onPageSizeChange: PropTypes.func,
-  onButtonClick: PropTypes.func,
-};
-
-Sidebar.defaultProps = {
-  campaignsList: [],
-  errorMsg: "",
-  onSelectDataSource: () => {},
-  onSelectCampaign: () => {},
-  onPageSizeChange: () => {},
-  onButtonClick: () => {},
 };
 
 export default Sidebar;
